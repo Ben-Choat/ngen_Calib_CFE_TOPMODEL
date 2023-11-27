@@ -84,7 +84,7 @@ mkdir "logs_${folder_name}"
 	# clone ngen 
 	echo -e "\n\ncloning ngen git repo\n\n"
 	# git clone https://github.com/noaa-owp/ngen $folder_name_ngen &&
-	git clone -b ngen_calibration https://github.com/Ben-Choat/ngen_Calib_CFE_TOPMODEL $folder_name_ngen &&
+	git clone -b ngen_calibration_archived https://github.com/Ben-Choat/ngen_Calib_CFE_TOPMODEL $folder_name_ngen &&
 		cd $folder_name_ngen &&
 		# following line should update all submodules to the version specified in repo
  		git submodule update --init --recursive ||
