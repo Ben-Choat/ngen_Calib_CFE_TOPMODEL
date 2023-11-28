@@ -1,6 +1,6 @@
 NOTE: This is the build I am using for calibration work with ngen-cal, TOPMODEL, and CFE on Ubuntu 22.04.
 
-TO BUILD THIS ENVIRONMENT/BUILD: Download build_ngen_calib.sh build script located in BuildScripts direclty, and execute it.
+TO BUILD THIS ENVIRONMENT/BUILD: Download build_ngen_calib.sh build script located in BuildScripts directly, edit the folder name in which to place ngen, and execute it.
 
 ![](https://github.com/noaa-owp/ngen/workflows/Testing%20and%20Validation/badge.svg)
 [![](https://github.com/noaa-owp/ngen/workflows/Documentation/badge.svg)](https://noaa-owp.github.io/ngen/)
