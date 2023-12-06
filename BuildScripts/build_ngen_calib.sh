@@ -197,6 +197,21 @@ mkdir "logs_${folder_name}"
 	# get requirements file name and copy to working dir
 	rqr_in=$(ls BuildScripts/requirements* | head -2 | tail -1)
 	rqr_in=$(basename "$rqr_in")
+	# edit requirements file to point to correct hdf5 location
+	hdf5Dir=$(find /usr/lib -type d -name hdf5)
+	if [ -z "$hdf5Dir" ]; then
+		echo -e \
+			"\n\n\
+			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n\
+			WARNING: root hdf5 library not found. \n\
+			You may need to manually install tables while pointing \n\
+			to correct hdf5 library. For example: \n\
+			pip install --install-option='--hdf5=/usr/lib/x86_64-linux-gnu/hdf5' tables==3.7.0 \n\
+			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n"
+	else
+		sed -i "/^tables/s|.*|tables==3.7.0 --install-option='--$hdf5Dir'|" requirements_20231206.txt
+		echo -e "\n\nroot hdf5 library found and set as ${hdf5Dir}\n\n"
+	fi
 	# copy requirments file to $folder_name_ngen
 	sudo cp ./BuildScripts/$rqr_in .
 	mkdir venv &&
