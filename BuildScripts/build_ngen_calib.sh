@@ -1,5 +1,8 @@
 #!/bin/bash
-set -x
+
+
+# fore greater detail in what is printed uncomment set -x
+# set -x
 # bchoat 2023/11/20
 # this script is edited to clone from my branch of ngen that I used for calibration
 # work with TOPMODEL and CFE.... basically no submodules are updated.
@@ -21,7 +24,7 @@ set -x
 
 # provide name for folder that will hold this ngen version
 # NOTE: this folder is defined relative to the directory in which this file is located/executed.
-folder_name="ngen_20231127_calib"
+folder_name="ngen_20231206_calib"
 
 ################
 # If want to build ngen-cal you need to include a line in the requirements.txt file
@@ -197,6 +200,7 @@ mkdir "logs_${folder_name}"
 	# get requirements file name and copy to working dir
 	rqr_in=$(ls BuildScripts/requirements* | head -2 | tail -1)
 	rqr_in=$(basename "$rqr_in")
+	echo -e "\n\nrequirement file is: $rqr_in  \n\n"
 	# edit requirements file to point to correct hdf5 location
 	hdf5Dir=$(find /usr/lib -type d -name hdf5)
 	if [ -z "$hdf5Dir" ]; then
@@ -209,7 +213,8 @@ mkdir "logs_${folder_name}"
 			pip install --install-option='--hdf5=/usr/lib/x86_64-linux-gnu/hdf5' tables==3.7.0 \n\
 			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n"
 	else
-		sed -i "/^tables/s|.*|tables==3.7.0 --install-option='--$hdf5Dir'|" "$rqr_in"
+		# sed -i "/^tables/s|.*|tables==3.7.0 --install-option='--hdf5=$hdf5Dir'|" ./BuildScripts/"$rqr_in"
+		sed -i "/^tables/d" ./BuildScripts/"$rqr_in"
 		echo -e "\n\nroot hdf5 library found and set as ${hdf5Dir}\n\n"
 	fi
 	# copy requirments file to $folder_name_ngen
@@ -217,7 +222,10 @@ mkdir "logs_${folder_name}"
 	mkdir venv &&
 		python$py_version -m venv venv &&
 		source venv/bin/activate &&
-		pip install -r $rqr_in ||
+		pip install -r $rqr_in &&
+		if [ -n "$hdf5Dir" ]; then
+			pip install --install-option='--hdf5=/usr/lib/x86_64-linux-gnu/hdf5' tables==3.7.0 
+		fi ||
 		exit 1		 
 	
 	echo -e "\n\nprepending venv directory to PATH\n\n"
@@ -352,9 +360,9 @@ mkdir "logs_${folder_name}"
 # copy build_ngen.sh and requirements.txt files to build folder
 #	cd $baseDir/$folder_name
 #	echo -e "${baseDir}/${folder_name_ngen}"
-echo -e "PWD: $PWD\n"
+# echo -e "PWD: $PWD\n"
 # this folder already in the new repo
-rm "$folder_name_ngen/$rqr_in"
+rm "$folder_name_ngen"/requirement*txt
 # mkdir "${baseDir}/${folder_name}/BuildScripts" &&
 #	mv "${baseDir}/${folder_name_ngen}/${rqr_in}" "${baseDir}/${folder_name}/BuildScripts" &&
 #	cp "${baseDir}/build_ngen.sh" "${baseDir}/${folder_name}/BuildScripts" ||
