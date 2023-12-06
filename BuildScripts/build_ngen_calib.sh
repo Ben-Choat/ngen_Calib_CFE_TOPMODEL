@@ -209,7 +209,7 @@ mkdir "logs_${folder_name}"
 			pip install --install-option='--hdf5=/usr/lib/x86_64-linux-gnu/hdf5' tables==3.7.0 \n\
 			!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n"
 	else
-		sed -i "/^tables/s|.*|tables==3.7.0 --install-option='--$hdf5Dir'|" requirements_20231206.txt
+		sed -i "/^tables/s|.*|tables==3.7.0 --install-option='--$hdf5Dir'|" "$rqr_in"
 		echo -e "\n\nroot hdf5 library found and set as ${hdf5Dir}\n\n"
 	fi
 	# copy requirments file to $folder_name_ngen
