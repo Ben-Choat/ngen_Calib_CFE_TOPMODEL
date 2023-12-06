@@ -1,8 +1,8 @@
-NOTE: This is the build I am using for calibration work with ngen-cal, TOPMODEL, and CFE on Ubuntu 22.04.
+# NOTE: This is the build I am using for calibration work with ngen-cal, TOPMODEL, and CFE on Ubuntu 22.04.
 
 TO BUILD THIS ENVIRONMENT/BUILD: Download build_ngen_calib.sh build script located in BuildScripts directly, edit the folder name in which to place ngen, and execute it.
 
-# Handling hdf5, tables, and addressing segfault when running with ngen and t-route
+## Handling hdf5, tables, and addressing segfault when running with ngen and t-route
 I have edited to attempt to find the path to root hdf5 library which should be specified when building tables, but my approach is not full proof.
 If you find that after building, you get a segfault when running ngen with t-route, you may need to uninstall and reinstall tables point to the correct hdf5 path.
 
