@@ -2,6 +2,27 @@ NOTE: This is the build I am using for calibration work with ngen-cal, TOPMODEL,
 
 TO BUILD THIS ENVIRONMENT/BUILD: Download build_ngen_calib.sh build script located in BuildScripts directly, edit the folder name in which to place ngen, and execute it.
 
+I have edited to attempt to find the path to root hdf5 library which should be specified when building tables, but my approach is not full proof.
+If you find that after building, you get a segfault when running ngen with t-route, you may need to uninstall and reinstall tables point to the correct hdf5 path.
+
+For example:
+# locate correct hdf5 path using one of the following approaches:
+opt1: find /usr -type d -name hdf5
+opt2: locate libhdf5.so
+      Identify the correct path. The path should end at hdf5, e.g., /usr/path/to/hdf5
+
+# unisntall table
+python -m pip uninstall table
+# reinstall table
+pip install --install-option='--hdf5=/usr/path/to/hdf5' tables==3.7.0
+
+============================================================
+============================================================
+============================================================
+
+
+
+
 ![](https://github.com/noaa-owp/ngen/workflows/Testing%20and%20Validation/badge.svg)
 [![](https://github.com/noaa-owp/ngen/workflows/Documentation/badge.svg)](https://noaa-owp.github.io/ngen/)
 
