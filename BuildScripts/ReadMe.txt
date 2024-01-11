@@ -9,5 +9,5 @@ requirements_20231120_freeze.txt:
 	File produced with pip freeze that includes all packages included all dependencies and
 	their versions. Try using above requirements first.
 
-build_ngen_calibration.sh:
+build_ngen_calib.sh:
 	USE THIS FILE FOR BUILDING THIS ENVIRONMENT!!
