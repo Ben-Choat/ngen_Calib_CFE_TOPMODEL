@@ -245,7 +245,7 @@ mkdir "logs_${folder_name}"
 		-DBMI_C_LIB_ACTIVE=ON \
 		-DBMI_FORTRAN_ACTIVE=ON \
 		-DNETCDF_ACTIVE=ON &&
-		# -DMPI_ACTIVE=ON && \
+		-DMPI_ACTIVE=ON && \
 		# -DLSTM_TORCH_LIB_ACTIVE=ON && \
 		make -j 4 -C cmake_build || # Bchoat changed from 8 to 4 because only 6 processors available w/other running jobs
 		exit 1
