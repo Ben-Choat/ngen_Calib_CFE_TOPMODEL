@@ -67,6 +67,7 @@ mkdir "logs_${folder_name}"
 		sudo apt-get install cmake &&
 		sudo apt-get install g++ &&
 		sudo apt-get install gfortran &&
+  		sudo apt-get install mpich &&
 		sudo apt-get install "python${py_version}-dev" &&
 		sudo apt-get install "python$py_version" &&
 		sudo apt-get install libudunits2-dev &&
