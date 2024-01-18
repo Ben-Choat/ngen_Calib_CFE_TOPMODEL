@@ -1,5 +1,6 @@
-from os import listdir
+from os import listdir, remove
 from os.path import isfile, join
+import glob
 import argparse
 import netCDF4 as nc
 import pandas as pd
@@ -108,6 +109,14 @@ def merge_partial_files(output_path : str, num_processes : int):
         pds.close()
 
     ds.close
+
+    # clean up
+    files_to_delete = glob.glob(f'{output_path}.*')
+    for file in files_to_delete:
+        try:
+            remove(file)
+        except:
+            print(f'Error deleting {file}')
 
 
 
