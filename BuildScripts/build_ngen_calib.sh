@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-# fore greater detail in what is printed uncomment set -x
+# for greater detail in what is printed uncomment set -x
 # set -x
 # bchoat 2023/11/20
 # this script is edited to clone from my branch of ngen that I used for calibration
@@ -43,6 +43,9 @@ py_version="3.10"
 # directory holding or where to place boost
 boostDir=$PWD
 
+# build with parallel capabilities?
+# PARALLEL="ON" or "OFF"
+PARALLEL="ON"
 #########################################################
 
 
@@ -246,7 +249,7 @@ mkdir "logs_${folder_name}"
 		-DBMI_C_LIB_ACTIVE=ON \
 		-DBMI_FORTRAN_ACTIVE=ON \
 		-DNETCDF_ACTIVE=ON \
-		-DMPI_ACTIVE=ON &&
+		-DMPI_ACTIVE="${PARALLEL}" &&
 		# -DLSTM_TORCH_LIB_ACTIVE=ON && \
 		make -j 4 -C cmake_build || # Bchoat changed from 8 to 4 because only 6 processors available w/other running jobs
 		exit 1
