@@ -8,7 +8,8 @@ pandas~=1.1.5
 geopandas==0.13.2
 flake8==6.1.0
 matplotlib==3.8.2
-git+https://github.com/noaa-owp/hypy@master#egg=hypy&subdirectory=python
+hypy @ git+https://github.com/noaa-owp/hypy@ae0bd8c69ba6daf529b0757bcb50b97145f7ed85#subdirectory=python
+idna==3.6
 git+https://github.com/Ben-Choat/ngen-cal@devBranch#egg=ngen_cal&subdirectory=python/ngen_cal
 hydrotools.nwis-client==3.3.1
 hydrotools.metrics==1.3.3
