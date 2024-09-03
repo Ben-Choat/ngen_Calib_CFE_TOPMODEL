@@ -1,4 +1,4 @@
-pydantic<2
+pydantic==1.10.13
 pathlib==1.0.1
 pytest==7.4.3
 pytest-mock==3.12.0
