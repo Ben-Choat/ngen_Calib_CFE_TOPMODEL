@@ -1,5 +1,6 @@
-from os import listdir
+from os import listdir, remove
 from os.path import isfile, join
+import glob
 import argparse
 import netCDF4 as nc
 import pandas as pd
@@ -71,7 +72,7 @@ def process_sublist(data : dict, lock: Lock, num: int):
         #load the csv data
         print("Process ", num, " reading file", csv_file)
         
-        df = pd.read_csv(join(input_path,csv_file), parse_dates={"Time": [0]}, na_values=["   nan"])
+        df = pd.read_csv(join(input_path,csv_file), parse_dates=[0], na_values=["   nan"])
 
         if first:
             ds = create_partial_netcdf(netcdf_path + "." + str(num), num_inputs, df.columns)
@@ -108,6 +109,14 @@ def merge_partial_files(output_path : str, num_processes : int):
         pds.close()
 
     ds.close
+
+    # clean up
+    files_to_delete = glob.glob(f'{output_path}.*')
+    for file in files_to_delete:
+        try:
+            remove(file)
+        except:
+            print(f'Error deleting {file}')
 
 
 
